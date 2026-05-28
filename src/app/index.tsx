@@ -1,17 +1,16 @@
-import { Text, View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
+import AppNavigator from "../navigation/AppNavigator";
 
-export default function Index() {
+export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Edit src/app/index.tsx to edit this screen.</Text>
+      <AppNavigator/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    flex: 1
   },
 });

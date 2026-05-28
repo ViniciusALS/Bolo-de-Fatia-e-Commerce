@@ -1,0 +1,38 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LandingScreen from '../screens/LandingScreen';
+import RegisterScreen from '../screens/RegisterScreen';
+// import PasswordScreen from '../screens/PasswordScreen';
+// import SuccessScreen from '../screens/SuccessScreen';
+import LoginScreen from '../screens/LoginScreen';
+// import ProductDetailScreen from '../screens/ProductDetailScreen';
+// import { ProductsScreen } from '../screens/CategoriesScreen';
+// import CheckoutScreen from '../screens/CheckoutScreen';
+// import OrdersScreen from '../screens/OrdersScreen';
+// import BottomTabNavigator from './BottomTabNavigator';
+
+const Stack = createNativeStackNavigator();
+
+export default function AppNavigator() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Landing"
+        screenOptions={{ headerShown: false, animation: 'slide_from_right' }}
+      >
+        <Stack.Screen name="Landing" component={LandingScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        {/* <Stack.Screen name="Password" component={PasswordScreen} />
+        <Stack.Screen name="Success" component={SuccessScreen} />
+        <Stack.Screen name="MainTabs" component={BottomTabNavigator} />
+        <Stack.Screen name="Products" component={ProductsScreen} />
+        <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+        <Stack.Screen name="Checkout" component={CheckoutScreen} />
+        <Stack.Screen name="Orders" component={OrdersScreen} />
+        <Stack.Screen name="Categories" component={BottomTabNavigator} />
+        <Stack.Screen name="Profile" component={BottomTabNavigator} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
