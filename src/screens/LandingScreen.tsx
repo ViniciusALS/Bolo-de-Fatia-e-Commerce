@@ -1,24 +1,17 @@
+import LargeButton from '@/components/LargeButton';
 import { useNavigation } from '@react-navigation/native';
-import { Button, Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { RootStackParamList } from '../navigation/types';
 import { Colors } from '../theme';
 // import { RootStackParamList } from '../navigation/types';
 // import { Button } from '../components/UI';
 // import { BorderRadius, Colors, FontSize, Spacing } from '../theme';
 
-// type Props = {
-//   navigation: NativeStackNavigationProp<RootStackParamList, 'Landing'>;
-// };
-
-// const OCCASIONS = [
-//   { emoji: '🎂', label: 'Aniversários' },
-//   { emoji: '🧁', label: 'Datas especiais' },
-//   { emoji: '🎁', label: 'Presentes' },
-//   { emoji: '👥', label: 'E muito mais' },
-// ];
 
 export default function LandingScreen() {
 
-	const navigation = useNavigation();
+	const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
 	return (
 		<View style={styles.safe}>
@@ -59,22 +52,22 @@ export default function LandingScreen() {
 				<Text style={styles.occasionsTitle}>Encontre o bolo perfeito para</Text>
 				<View style={styles.occasions}>
 					<View style={styles.featureItem}>
-						<Image source={require('../../assets/images/icons/seguro.png')}/>
+						<Image source={require('../../assets/images/icons/aniversario.png')}/>
 						<Text style={styles.featureLabel}>Aniversários</Text>
 					</View>
 
 					<View style={styles.featureItem}>
-						<Image source={require('../../assets/images/icons/seguro.png')}/>
+						<Image source={require('../../assets/images/icons/data_especial.png')}/>
 						<Text style={styles.featureLabel}>Datas especiais</Text>
 					</View>
 
 					<View style={styles.featureItem}>
-						<Image source={require('../../assets/images/icons/seguro.png')}/>
+						<Image source={require('../../assets/images/icons/presente.png')}/>
 						<Text style={styles.featureLabel}>Presentes</Text>
 					</View>
 
 					<View style={styles.featureItem}>
-						<Image source={require('../../assets/images/icons/seguro.png')}/>
+						<Image source={require('../../assets/images/icons/comunidade.png')}/>
 						<Text style={styles.featureLabel}>E muito mais</Text>
 					</View>
 				</View>
@@ -82,9 +75,8 @@ export default function LandingScreen() {
 
 				{/* CTAs */}
 				<View style={styles.actions}>
-					<Button title="Criar conta" onPress={() => navigation.navigate('Register')} />
-					<View style={styles.spacer} />
-					<Button title="Entrar" onPress={() => navigation.navigate('Login')} />
+					<LargeButton title="Criar conta" onPress={() => navigation.navigate('Register')} />
+					<LargeButton title="Entrar" variant="outline" onPress={() => navigation.navigate('Login')} />
 					<Text style={styles.terms}>
 						Ao continuar, você concorda com nossos{'\n'}
 						<Text style={styles.termsLink}>Termos de uso</Text>
@@ -151,6 +143,7 @@ const styles = StyleSheet.create({
   	},
 
   	occasionsTitle: {
+		top: -24,
     	fontSize: 10,
     	fontWeight: '600',
     	color: Colors.quasePreto,
@@ -158,7 +151,8 @@ const styles = StyleSheet.create({
     	marginBottom: 24,
   	},
   	occasions: {
- 	   flexDirection: 'row',
+		top: -24,
+ 	   	flexDirection: 'row',
     	justifyContent: 'space-around',
     	marginHorizontal: 24,
   	},
@@ -172,15 +166,21 @@ const styles = StyleSheet.create({
 //   },
 
   	actions: {
-		// paddingHorizontal: Spacing.xl
+		marginTop: "auto",
+		paddingHorizontal: 24,
+		justifyContent: 'center',
+		alignItems: 'center',
+		gap: 8,
 	},
-//   spacer: { height: 12 },
-//   terms: {
-//     textAlign: 'center',
-//     fontSize: FontSize.xs,
-//     color: Colors.textMuted,
-//     marginTop: Spacing.md,
-//     lineHeight: 18,
-//   },
-//   termsLink: { textDecorationLine: 'underline', color: Colors.textMuted },
+  	terms: {
+		textAlign: 'center',
+		fontSize: 10,
+		color: Colors.quasePreto,
+  	},
+  	termsLink: {
+		textDecorationLine: 'underline',
+		color: Colors.preto,
+		fontWeight: '600',
+		lineHeight: 16,
+	},
 });
