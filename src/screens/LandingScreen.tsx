@@ -1,7 +1,8 @@
+import { AwardSvg, BirthdayCakeSvg, BoloSvg, ComunitySvg, CupcakeSvg, HeartSvg, LockSvg, PresentSvg, TruckSvg } from '@/assets/icons';
 import LargeButton from '@/components/LargeButton';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { RootStackParamList } from '../navigation/types';
 import { Colors } from '../theme';
 // import { RootStackParamList } from '../navigation/types';
@@ -17,7 +18,7 @@ export default function LandingScreen() {
 		<View style={styles.safe}>
 				{/* Hero */}
 				<ImageBackground style={styles.hero} source={require('../../assets/images/bolo_background.png')} resizeMode="cover">
-					<Image source={require('../../assets/images/icons/Bolo.png')} style={{ width: 28, height: 32 }} />
+					<BoloSvg/>
 					<Text style={styles.heroTitle}>Bolos feitos{'\n'}para cada{'\n'}momento</Text>
 					<View style={styles.divider} />
 					<Text style={styles.heroSubtitle}>
@@ -28,22 +29,22 @@ export default function LandingScreen() {
 				{/* Feature Pills */}
 				<View style={styles.featuresCard}>
 					<View style={styles.featureItem}>
-						<Image source={require('../../assets/images/icons/ingredientes.png')}/>
+						<AwardSvg/>
 						<Text style={styles.featureLabel}>Ingredientes{'\n'}selecionados</Text>
 					</View>
 
 					<View style={styles.featureItem}>
-						<Image source={require('../../assets/images/icons/amor.png')}/>
+						<HeartSvg/>
 						<Text style={styles.featureLabel}>Feito{'\n'}com amor</Text>
 					</View>
 
 					<View style={styles.featureItem}>
-						<Image source={require('../../assets/images/icons/entrega.png')}/>
+						<TruckSvg/>
 						<Text style={styles.featureLabel}>Entrega{'\n'}rápida</Text>
 					</View>
 
 					<View style={styles.featureItem}>
-						<Image source={require('../../assets/images/icons/seguro.png')}/>
+						<LockSvg/>
 						<Text style={styles.featureLabel}>Compra 100%{'\n'}segura</Text>
 					</View>
 				</View>
@@ -52,22 +53,22 @@ export default function LandingScreen() {
 				<Text style={styles.occasionsTitle}>Encontre o bolo perfeito para</Text>
 				<View style={styles.occasions}>
 					<View style={styles.featureItem}>
-						<Image source={require('../../assets/images/icons/aniversario.png')}/>
+						<BirthdayCakeSvg/>
 						<Text style={styles.featureLabel}>Aniversários</Text>
 					</View>
 
 					<View style={styles.featureItem}>
-						<Image source={require('../../assets/images/icons/data_especial.png')}/>
+						<CupcakeSvg/>
 						<Text style={styles.featureLabel}>Datas especiais</Text>
 					</View>
 
 					<View style={styles.featureItem}>
-						<Image source={require('../../assets/images/icons/presente.png')}/>
+						<PresentSvg/>
 						<Text style={styles.featureLabel}>Presentes</Text>
 					</View>
 
 					<View style={styles.featureItem}>
-						<Image source={require('../../assets/images/icons/comunidade.png')}/>
+						<ComunitySvg/>
 						<Text style={styles.featureLabel}>E muito mais</Text>
 					</View>
 				</View>
