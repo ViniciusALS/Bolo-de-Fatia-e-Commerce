@@ -1,56 +1,39 @@
-# Welcome to your Expo app 👋
+# Bolo de Fatia 🍰
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Projeto desenvolvido para a disciplina de **Desenvolvimento Mobile** do professor André, no 4º semestre da UVA. O aplicativo é construído com [Expo](https://expo.dev) e React Native, criado a partir do [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## Get started
+## Como começar
 
-1. Install dependencies
+1. Instale as dependências
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Inicie o aplicativo
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+Na saída do terminal, você encontrará opções para abrir o aplicativo em um
 
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- [emulador Android](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [simulador iOS](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), um sandbox limitado para experimentar o desenvolvimento de aplicativos com Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Você pode começar a desenvolver editando os arquivos dentro do diretório **app**. Este projeto usa [roteamento baseado em arquivos](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+### Outras etapas de configuração
 
-When you're ready, run:
+- Para configurar o ESLint para análise de código, execute `npx expo lint` ou siga nosso guia ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
+- Se quiser configurar testes unitários, siga nosso guia ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
+- Saiba mais sobre a configuração do TypeScript neste template em nosso guia ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
 
-```bash
-npm run reset-project
-```
+## Saiba mais
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Para aprender mais sobre como desenvolver seu projeto com Expo, consulte os seguintes recursos:
 
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Documentação do Expo](https://docs.expo.dev/): Aprenda os fundamentos ou aprofunde-se em tópicos avançados com nossos [guias](https://docs.expo.dev/guides).
+- [Tutorial Learn Expo](https://docs.expo.dev/tutorial/introduction/): Siga um tutorial passo a passo no qual você criará um projeto que roda em Android, iOS e web.
