@@ -1,4 +1,3 @@
-import { CakeUpload } from '@/assets/icons';
 import InputField from '@/components/InputField';
 import LargeButton from '@/components/LargeButton';
 import ReturnButton from '@/components/ReturnButton';
@@ -43,10 +42,6 @@ export default function RegisterScreen() {
 				<ReturnButton onPress={() => navigation.goBack()} />
 				<Text style={styles.titulo}>Dados pessoais</Text>
 				<Text style={styles.subtitulo}>Informe seus dados para{'\n'}criar uma conta</Text>
-			</View>
-
-			<View style={styles.cakeUploadContainer}>
-				<CakeUpload/>
 			</View>
 
 			<View style={styles.form}>
@@ -98,9 +93,6 @@ const styles = StyleSheet.create({
 	},
 	upperSection: {
 		gap: 16
-	},
-	cakeUploadContainer: {
-		alignItems: 'center',
 	},
 	form: {
 		gap: 16,
