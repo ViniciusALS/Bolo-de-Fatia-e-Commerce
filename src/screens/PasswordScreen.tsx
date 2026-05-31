@@ -7,13 +7,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../theme';
-// import { RootStackParamList } from '../navigation/types';
-// import { Button } from '../components/UI';
-// import { BorderRadius, Colors, FontSize, Spacing } from '../theme';
-
-// type Props = {
-//   navigation: NativeStackNavigationProp<RootStackParamList, 'Landing'>;
-// };
 
 interface FormData {
 	firstName?: string;
@@ -25,7 +18,7 @@ interface FormData {
 }
 
 
-export default function RegisterScreen() {
+export default function PasswordScreen() {
 
 	const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -42,37 +35,38 @@ export default function RegisterScreen() {
 		<View style={styles.safe}>
 			<View style={styles.upperSection}>
 				<ReturnButton onPress={() => navigation.goBack()} />
-				<Text style={styles.titulo}>Dados pessoais</Text>
-				<Text style={styles.subtitulo}>Informe seus dados para{'\n'}criar uma conta</Text>
+				<Text style={styles.titulo}>Criar senha</Text>
+				<Text style={styles.subtitulo}>Sua senha deve ter pelo menos 8 caracteres</Text>
 			</View>
 
 			<View style={styles.form}>
 				<InputField
-					label="Primeiro nome"
-					placeholder="Ex.: João"
-					onChange={(value) => handleInputChange('firstName', value)}
+					label="Senha"
+					placeholder="Ex.: 12345678"
+					secureTextEntry
+					onChange={(value) => handleInputChange('password', value)}
 				/>
 
-				<InputField
-					label="Sobrenome completo"
-					placeholder="Ex.: Costas"
-					onChange={(value) => handleInputChange('lastName', value)}
-				/>
+				<View>
+					<Text>A senha deve conter:</Text>
+					<Text>Pelo menos 8 caracteres</Text>
+					<Text>Pelo menos uma letra minuscula</Text>
+					<Text>Pelo menos uma letra maiuscula</Text>
+					<Text>Pelo menos um número</Text>
+					<Text>Pelo menos um caractere especial</Text>
+				</View>
 
 				<InputField
-					label="E-mail"
-					placeholder="Ex.: joao@example.com"
-					onChange={(value) => handleInputChange('email', value)}
+					label="Confirmar senha"
+					placeholder="Ex.: 12345678"
+					secureTextEntry
+					onChange={(value) => handleInputChange('confirmPassword', value)}
 				/>
 
-				<InputField
-					label="Telefone"
-					placeholder="Ex.: (99) 99999-9999"
-					onChange={(value) => handleInputChange('phone', value)}
-				/>
+				<Text>As senhas devem ser iguais</Text>
 			</View>
 
-			<LargeButton title={'Continuar'} onPress={() => navigation.navigate('Password')} />
+			<LargeButton title={'Continuar'} onPress={() => navigation.navigate('Success')} />
 
 		</View>
 	);

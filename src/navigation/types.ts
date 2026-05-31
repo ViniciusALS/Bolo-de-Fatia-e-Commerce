@@ -3,8 +3,8 @@
 export type RootStackParamList = {
   Landing: undefined;
   Register: undefined;
-  // Password: undefined;
-  // Success: undefined;
+  Password: undefined;
+  Success: undefined;
   Login: undefined;
   // MainTabs: undefined;
   // Categories: undefined;
