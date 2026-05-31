@@ -5,9 +5,13 @@ type props = {
     label: string,
     placeholder: string,
     onChange: (value: string) => void,
+    secureTextEntry?: boolean
 }
 
-export default function InputField({ label, placeholder, onChange }: props) {
+export default function InputField({ label, placeholder, onChange, secureTextEntry = false }: props) {
+
+    const isSecret = secureTextEntry === true;
+
     return (
         <View style={style.field}>
             <Text style={style.label}>{label}</Text>
@@ -15,6 +19,7 @@ export default function InputField({ label, placeholder, onChange }: props) {
                 placeholder={placeholder}
                 placeholderTextColor="#ADADAD"
                 onChangeText={onChange}
+                secureTextEntry={isSecret}
                 style={style.input} />
         </View>
     );
