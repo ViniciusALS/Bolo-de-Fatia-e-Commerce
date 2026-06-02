@@ -41,7 +41,7 @@ export default function RegisterScreen() {
 	return (
 		<View style={styles.safe}>
 			<View style={styles.upperSection}>
-				<ReturnButton onPress={() => navigation.goBack()} />
+				<ReturnButton/>
 				<Text style={styles.titulo}>Dados pessoais</Text>
 				<Text style={styles.subtitulo}>Informe seus dados para{'\n'}criar uma conta</Text>
 			</View>

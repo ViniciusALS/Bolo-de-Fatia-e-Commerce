@@ -34,7 +34,7 @@ export default function PasswordScreen() {
 	return (
 		<View style={styles.safe}>
 			<View style={styles.upperSection}>
-				<ReturnButton onPress={() => navigation.goBack()} />
+				<ReturnButton/>
 				<Text style={styles.titulo}>Criar senha</Text>
 				<Text style={styles.subtitulo}>Sua senha deve ter pelo menos 8 caracteres</Text>
 			</View>

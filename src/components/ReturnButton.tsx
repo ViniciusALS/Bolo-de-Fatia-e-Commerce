@@ -1,14 +1,15 @@
 import { ArrowLeftSvg } from "@/assets/icons";
+import { RootStackParamList } from "@/navigation/types";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { TouchableOpacity } from "react-native";
 
-// ─── Primary Button ────────────────────────────────────────────────────────────
-interface props {
-    onPress: () => void;
-}
+export default function ReturnButton() {
 
-export default function ReturnButton({ onPress }: props) {
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={()=>navigation.goBack()}>
             <ArrowLeftSvg/>
         </TouchableOpacity>
     );

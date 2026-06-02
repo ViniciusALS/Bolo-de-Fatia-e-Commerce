@@ -30,7 +30,7 @@ export default function LoginScreen() {
 	return (
 		<View style={styles.safe}>
 			<View style={styles.upperSection}>
-				<ReturnButton onPress={() => navigation.goBack()} />
+				<ReturnButton />
 				<Text style={styles.titulo}>Entrar</Text>
 				<Text style={styles.subtitulo}>Seja bem vindo de volta</Text>
 			</View>
