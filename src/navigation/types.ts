@@ -11,6 +11,6 @@ export type RootStackParamList = {
   // Products: { categoryId: string; categoryName: string };
   // ProductDetail: { product: Product };
   // Checkout: undefined;
-  // Orders: undefined;
+  Cart: undefined;
   // Profile: undefined;
 };
