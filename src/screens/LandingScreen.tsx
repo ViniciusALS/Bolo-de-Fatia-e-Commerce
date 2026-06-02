@@ -1,11 +1,11 @@
 import { AwardSvg, BirthdayCakeSvg, BoloSvg, ComunitySvg, CupcakeSvg, HeartSvg, LockSvg, PresentSvg, TruckSvg } from '@/assets/icons';
 import LargeButton from '@/components/LargeButton';
+import { RootStackParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
-import { RootStackParamList } from '../navigation/types';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '../theme';
-// import { RootStackParamList } from '../navigation/types';
 // import { Button } from '../components/UI';
 // import { BorderRadius, Colors, FontSize, Spacing } from '../theme';
 
@@ -15,7 +15,7 @@ export default function LandingScreen() {
 	const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
 	return (
-		<View style={styles.safe}>
+		<SafeAreaView style={styles.safe}>
 				{/* Hero */}
 				<ImageBackground style={styles.hero} source={require('../../assets/images/bolo_background.png')} resizeMode="cover">
 					<BoloSvg/>
@@ -76,8 +76,15 @@ export default function LandingScreen() {
 
 				{/* CTAs */}
 				<View style={styles.actions}>
-					<LargeButton title="Criar conta" onPress={() => navigation.navigate('Register')} />
-					<LargeButton title="Entrar" variant="outline" onPress={() => navigation.navigate('Login')} />
+					<LargeButton
+						title="Criar conta"
+						onPress={() => navigation.navigate('Register')} />
+
+					<LargeButton
+						title="Entrar"
+						variant="outline"
+						onPress={() => navigation.navigate('Login') } />
+
 					<Text style={styles.terms}>
 						Ao continuar, você concorda com nossos{'\n'}
 						<Text style={styles.termsLink}>Termos de uso</Text>
@@ -85,14 +92,13 @@ export default function LandingScreen() {
 						<Text style={styles.termsLink}>Política de privacidade</Text>
 					</Text>
 				</View>
-		</View>
+		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
 	safe: {
 		flex: 1,
-		// padding: 24,
 		backgroundColor: Colors.cremeClaro,
 	},
 	hero: {

@@ -6,7 +6,7 @@ export type RootStackParamList = {
   Password: undefined;
   Success: undefined;
   Login: undefined;
-  // MainTabs: undefined;
+  MainTabs: undefined;
   // Categories: undefined;
   // Products: { categoryId: string; categoryName: string };
   // ProductDetail: { product: Product };

@@ -40,7 +40,7 @@ export default function SucessfulNewAccountScreen() {
                 <Text style={styles.subtitulo}>Agora você faz parte da{'\n'}nossa confeitaria</Text>
             </View>
 
-            <LargeButton title={'Continuar'} onPress={() => {console.log(formData);}} />
+            <LargeButton title={'Continuar'} onPress={() => navigation.navigate('MainTabs')} />
 
         </View>
     );

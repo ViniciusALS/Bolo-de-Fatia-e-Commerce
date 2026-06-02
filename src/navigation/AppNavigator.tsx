@@ -9,7 +9,7 @@ import NewAccountScreen from '../screens/SucessfulNewAccountScreen';
 // import { ProductsScreen } from '../screens/CategoriesScreen';
 // import CheckoutScreen from '../screens/CheckoutScreen';
 // import OrdersScreen from '../screens/OrdersScreen';
-// import BottomTabNavigator from './BottomTabNavigator';
+import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,8 +25,7 @@ export default function AppNavigator() {
         <Stack.Screen name="Password" component={PasswordScreen} />
         <Stack.Screen name="Success" component={NewAccountScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
-        {/* <Stack.Screen name="Success" component={SuccessScreen} /> */}
-        {/* <Stack.Screen name="MainTabs" component={BottomTabNavigator} /> */}
+        <Stack.Screen name="MainTabs" component={BottomTabNavigator} />
         {/* <Stack.Screen name="Products" component={ProductsScreen} /> */}
         {/* <Stack.Screen name="ProductDetail" component={ProductDetailScreen} /> */}
         {/* <Stack.Screen name="Checkout" component={CheckoutScreen} /> */}

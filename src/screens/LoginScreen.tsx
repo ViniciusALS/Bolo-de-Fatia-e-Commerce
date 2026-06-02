@@ -5,13 +5,27 @@ import ReturnButton from '@/components/ReturnButton';
 import { RootStackParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../theme';
 
+interface FormData {
+	email?: string;
+	password?: string;
+}
 
 export default function LoginScreen() {
 
+	const [formData, setFormData] = useState({})
+
 	const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+	function handleInputChange(field: keyof FormData, value: string) {
+		setFormData(prevData => ({
+			...prevData,
+			[field]: value,
+		}));
+	}
 
 	return (
 		<View style={styles.safe}>
@@ -29,18 +43,18 @@ export default function LoginScreen() {
 				<InputField
 					label="Email"
 					placeholder=""
-					onChange={(value) => handleInputChange('password', value)}
+					onChange={(value) => handleInputChange('email', value)}
 				/>
 
 				<InputField
 					label="Senha"
 					placeholder=""
 					secureTextEntry
-					onChange={(value) => handleInputChange('confirmPassword', value)}
+					onChange={(value) => handleInputChange('password', value)}
 				/>
 			</View>
 
-			<LargeButton title={'Continuar'} onPress={() => navigation.navigate('Success')} />
+			<LargeButton title={'Continuar'} onPress={() => navigation.navigate('MainTabs')} />
 
 		</View>
 	);

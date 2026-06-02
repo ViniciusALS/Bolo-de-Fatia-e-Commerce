@@ -1,16 +1,11 @@
-import { StyleSheet, View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import AppNavigator from "../navigation/AppNavigator";
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <SafeAreaProvider>
       <AppNavigator/>
-    </View>
+    </SafeAreaProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-});
