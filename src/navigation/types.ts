@@ -1,12 +1,12 @@
 // import { Product } from '../data/mockData';
 
-import { User } from "../types";
+import { Usuario } from "../types";
 
 export type RootStackParamList = {
   Landing: undefined;
   Register: undefined;
   Password: {
-    user: User;
+    usuario: Usuario;
   };
   Success: undefined;
   Login: undefined;

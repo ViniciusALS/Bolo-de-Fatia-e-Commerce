@@ -4,7 +4,6 @@ import { UserProvider } from "../context/UserContext";
 import AppNavigator from "../navigation/AppNavigator";
 
 export default function App() {
-=
 	return (
 		<SafeAreaProvider>
 			<UserProvider>

@@ -1,23 +1,23 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
-import { Product } from '../types';
+import { Produto } from '../types';
 
 interface CartContextType {
-	selectedProducts: Product[] | null;
-	selectProduct: (product: Product) => void;
-	removeProduct: (product: Product) => void;
+	selectedProducts: Produto[] | null;
+	selectProduct: (product: Produto) => void;
+	removeProduct: (product: Produto) => void;
 	clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-	const [selectedProducts, setSelectedProducts] = useState<Product[] | null>(null);
+	const [selectedProducts, setSelectedProducts] = useState<Produto[] | null>(null);
 
-	function selectProduct(product: Product) {
+	function selectProduct(product: Produto) {
 		setSelectedProducts(prev => [...(prev ?? []), product]);
 	}
 
-	function removeProduct(product: Product) {
+	function removeProduct(product: Produto) {
 		setSelectedProducts(prev => prev?.filter(p => p.id !== product.id) ?? null);
 	}
 

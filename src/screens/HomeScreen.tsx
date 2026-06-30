@@ -1,5 +1,5 @@
 import ProductCard from '@/components/ProductCard';
-import { Product } from '@/types';
+import { Produto } from '@/types';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import RoundedButton from '../components/RoundedButtons';
 import ShoppingCartButton from '../components/ShoppingCartButton';
@@ -7,45 +7,45 @@ import { useUser } from '../context/UserContext';
 import { Colors } from '../theme';
 
 
-const listaDeProdutos:Product[] = [
+const listaDeProdutos:Produto[] = [
     {
         id: 1,
-        name: "Bolo de Floresta Negra",
+        nome: "Bolo de Floresta Negra",
         price: 59.99,
         imagePath: "'../../assets/images/bolo-floresta-negra.png'",
         isFavorite: true,
     },
     {
         id: 2,
-        name: "Bolo de Laranja",
+        nome: "Bolo de Laranja",
         price: 45.99,
         imagePath: "../../assets/images/bolo-floresta-negra.png",
         isFavorite: true,
     },
     {
         id: 3,
-        name: "Bolo de Chocolate",
+        nome: "Bolo de Chocolate",
         price: 69.99,
         imagePath: "../../assets/images/bolo-floresta-negra.png",
         isFavorite: true,
     },
     {
         id: 4,
-        name: "Bolo de Morango",
+        nome: "Bolo de Morango",
         price: 79.99,
         imagePath: "../../assets/images/bolo-floresta-negra.png",
         isFavorite: true,
     },
     {
         id: 5,
-        name: "Bolo Formigueiro",
+        nome: "Bolo Formigueiro",
         price: 37.99,
         imagePath: "../../assets/images/bolo-floresta-negra.png",
         isFavorite: true,
     },
     {
         id: 6,
-        name: "Bolo de Maracuja",
+        nome: "Bolo de Maracuja",
         price: 49.99,
         imagePath: "../../assets/images/bolo-floresta-negra.png",
         isFavorite: true,

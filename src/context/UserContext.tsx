@@ -1,18 +1,18 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
-import { User } from '../types';
+import { Usuario } from '../types';
 
 export interface UserContextType {
-	user: User | null;
-	login: (user: User) => void;
+	user: Usuario | null;
+	login: (user: Usuario) => void;
 	logout: () => void;
 }
 
 export const UserContext = createContext<UserContextType | null>(null);
 
 export function UserProvider({ children }: { children: ReactNode }) {
-	const [user, setUser] = useState<User | null>(null);
+	const [user, setUser] = useState<Usuario | null>(null);
 
-	function login(user: User) {
+	function login(user: Usuario) {
 		setUser(user);
 	}
 

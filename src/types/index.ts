@@ -1,17 +1,19 @@
-export interface User {
-	id?: number;
-	firstName?: string;
-	lastName?: string;
+export interface Usuario {
+	id?: string;
+	created_at?: string;
+	nome?: string;
+	sobrenome?: string;
+	telefone?: string;
 	email?: string;
-	telephone?: string;
-	password?: string;
-	passwordConfirmation?: string;
+	senha?: string;
 }
 
-export interface Product {
-	id: number;
-	name: string;
-	price: number;
-	imagePath: string;
-	isFavorite?: boolean;
+export interface Produto {
+	id?: string;
+	created_at?: string;
+	nome?: string;
+	descricao?: string;
+	preco?: number;
+	imagem_uri?: string;
+	favorito?: boolean;
 }

@@ -1,3 +1,4 @@
+import { supabase } from '@/utils/supabase';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
@@ -7,27 +8,80 @@ import LargeButton from '../components/LargeButton';
 import ReturnButton from '../components/ReturnButton';
 import { RootStackParamList } from '../navigation/types';
 import { Colors } from '../theme';
-import { User } from '../types';
-// import { RootStackParamList } from '../navigation/types';
-// import { Button } from '../components/UI';
-// import { BorderRadius, Colors, FontSize, Spacing } from '../theme';
-
-// type Props = {
-//   navigation: NativeStackNavigationProp<RootStackParamList, 'Landing'>;
-// };
+import { Usuario } from '../types';
 
 
 export default function RegisterScreen() {
 
 	const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-	const [formData, setFormData] = useState<User>({});
+	const [usuario, setUsuario] = useState<Usuario>({});
 
-	function handleInputChange(field: keyof User, value: string) {
-		setFormData(prevData => ({
-			...prevData,
-			[field]: value,
-		}));
+	const [nome, setNome] = useState<string>('');
+	const [sobrenome, setSobrenome] = useState<string>('');
+	const [email, setEmail] = useState<string>('');
+	const [telefone, setTelefone] = useState<string>('');
+
+	function validaCampos() {
+		if(!nome)
+			return false;
+
+		if (!sobrenome)
+			return false;
+
+		if (!email)
+			return false;
+
+		const validateEmail = (email:string) => {
+			return email.match(
+				/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+			);
+		};
+
+		if (!validateEmail(email))
+			return false;
+
+		const validaTelefone = (telefone:string) => {
+			return telefone.match(
+				/^\(\d{2}\)\d{4,5}-?\d{4}$/
+			);
+		};
+
+		if (!validaTelefone(telefone))
+			return false;
+
+		return true;
+	}
+
+	async function checkAndSetUsuario() {
+		if (!validaCampos()){
+			console.log("Campos invalidos");
+			return;
+		}
+
+		try {
+			const {data, error} = await supabase.from("usuarios").select().eq("email", email);
+
+			if (data?.length !== 0 || error){
+				console.log("Mensagem de erro " + error);
+				console.log("Data: " + data);
+				return;
+			}
+		}
+		catch (error) {
+			console.log("Erro encontrado");
+			return;
+		}
+
+		setUsuario({
+			nome: nome,
+			sobrenome: sobrenome,
+			email: email,
+			telefone: telefone,
+		});
+
+		console.log("Usuario criado: ");
+		console.log(usuario);
 	}
 
 	return (
@@ -42,30 +96,31 @@ export default function RegisterScreen() {
 				<InputField
 					label="Primeiro nome"
 					placeholder="Ex.: João"
-					onChange={(value) => handleInputChange('firstName', value)}
+					onChange={(value) => setNome(value)}
 				/>
 
 				<InputField
 					label="Sobrenome completo"
 					placeholder="Ex.: Costas"
-					onChange={(value) => handleInputChange('lastName', value)}
+					onChange={(value) => setSobrenome(value)}
 				/>
 
 				<InputField
 					label="E-mail"
 					placeholder="Ex.: joao@example.com"
-					onChange={(value) => handleInputChange('email', value)}
+					onChange={(value) => setEmail(value)}
 				/>
 
 				<InputField
 					label="Telefone"
 					placeholder="Ex.: (99) 99999-9999"
-					onChange={(value) => handleInputChange('telephone', value)}
+					onChange={(value) => setTelefone(value)}
 				/>
 			</View>
 
-			<LargeButton title={'Continuar'} onPress={() => {
-				navigation.navigate('Password', { user: formData });
+			<LargeButton title={'Continuar'} isAvailable={validaCampos()} onPress={() => {
+				checkAndSetUsuario();
+				navigation.navigate('Password', { usuario: usuario });
 			}} />
 
 		</View>

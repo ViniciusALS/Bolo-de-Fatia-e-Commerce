@@ -1,3 +1,4 @@
+import { supabase } from '@/utils/supabase';
 import { StaticScreenProps, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
@@ -8,11 +9,11 @@ import ReturnButton from '../components/ReturnButton';
 import { useUser } from '../context/UserContext';
 import { RootStackParamList } from '../navigation/types';
 import { Colors } from '../theme';
-import { User } from '../types';
+import { Usuario } from '../types';
 
 
 type Props = StaticScreenProps<{
-  user: User;
+  usuario: Usuario;
 }>;
 
 
@@ -21,18 +22,78 @@ export default function PasswordScreen({ route }: Props) {
 	const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 	const { login } = useUser();
 
-	const [formData, setFormData] = useState<User>({
-		firstName: route.params.user.firstName,
-		lastName: route.params.user.lastName,
-		email: route.params.user.email,
-		telephone: route.params.user.telephone,
+	const [usuario, setUsuario] = useState<Usuario>({
+		nome: route.params.usuario.nome,
+		sobrenome: route.params.usuario.sobrenome,
+		telefone: route.params.usuario.telefone,
+		email: route.params.usuario.email,
 	});
 
-	function handleInputChange(field: keyof User, value: string) {
-		setFormData(prevData => ({
-			...prevData,
-			[field]: value,
-		}));
+	const [senha, setSenha] = useState<string>();
+	const [senhaRepetida, setSenhaRepetida] = useState<string>();
+
+	function validaCampos() {
+		if (!senha)
+			return false;
+
+		if (!senhaRepetida)
+			return false;
+
+		if (senha !== senhaRepetida)
+			return false;
+
+		if (senha.length < 8)
+			return false;
+
+		if (senha === senha.toLowerCase())
+			return false;
+
+		if (senha === senha.toUpperCase())
+			return false;
+
+		if (!/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(senha))
+			return false;
+
+		if (!/\d/.test(senha))
+			return false;
+
+		return true;
+	}
+
+	async function validaEconfiguraUsuario() {
+
+		if (!validaCampos())
+			return;
+
+		setUsuario(prev => ({...prev, senha: senha}))
+
+		console.log("Novo Usuario: ");
+		console.log(usuario)
+
+		try {
+			const {data, error} = await supabase
+				.from('usuarios')
+				.insert({
+					nome: usuario.nome,
+					sobrenome: usuario.sobrenome,
+					telefone: usuario.telefone,
+					email: usuario.email,
+					senha: usuario.senha
+				})
+				.select()
+				.single();
+
+				if (error){
+					console.log(error)
+					return;
+				}
+
+				console.log(data);
+		}
+		catch(error) {
+			console.log(error);
+			return;
+		}
 	}
 
 	return (
@@ -48,7 +109,7 @@ export default function PasswordScreen({ route }: Props) {
 					label="Senha"
 					placeholder="Ex.: 12345678"
 					secureTextEntry
-					onChange={(value) => handleInputChange('password', value)}
+					onChange={(value) => setSenha(value)}
 				/>
 
 				<View>
@@ -64,14 +125,15 @@ export default function PasswordScreen({ route }: Props) {
 					label="Confirmar senha"
 					placeholder="Ex.: 12345678"
 					secureTextEntry
-					onChange={(value) => handleInputChange('passwordConfirmation', value)}
+					onChange={(value) => setSenhaRepetida(value)}
 				/>
 
 				<Text>As senhas devem ser iguais</Text>
 			</View>
 
-			<LargeButton title={'Continuar'} onPress={() => {
-				login(formData);
+			<LargeButton title={'Continuar'} isAvailable={validaCampos()} onPress={() => {
+				validaEconfiguraUsuario();
+				login(usuario);
 				navigation.navigate('Success')
 			}} />
 

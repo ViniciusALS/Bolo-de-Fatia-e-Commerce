@@ -1,16 +1,16 @@
-import { Product } from "@/types";
+import { Produto } from "@/types";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 type Props = {
-    product: Product;
+    product: Produto;
 }
 
 export default function ProductCard({ product }: Props) {
 
     return (
         <View style={styles.card}>
-            <Image source={require('../../assets/images/bolo-floresta-negra.png')} alt={product.name} />
-            <Text style={styles.titulo}>{product.name}</Text>
+            <Image source={require('../../assets/images/bolo-floresta-negra.png')} alt={product.nome} />
+            <Text style={styles.titulo}>{product.nome}</Text>
             <Text>${product.price.toFixed(2)}</Text>
         </View>
     );

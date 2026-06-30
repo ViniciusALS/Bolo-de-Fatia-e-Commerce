@@ -1,24 +1,27 @@
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, TurboModuleRegistry } from "react-native";
 import { Colors } from "../theme";
 
 // ─── Primary Button ────────────────────────────────────────────────────────────
 interface ButtonProps {
   title: string;
+  isAvailable?: boolean;
   onPress: () => void;
   variant?: 'primary' | 'outline';
   style?: object;
 }
 
-export default function LargeButton({ title, onPress, variant = 'primary', style }: ButtonProps) {
+export default function LargeButton({ title, isAvailable = true, onPress, variant = 'primary', style }: ButtonProps) {
 
 	const isPrimary = variant === 'primary';
 
 	return (
 		<TouchableOpacity
-			onPress={onPress}
+			onPress={isAvailable ? onPress : ()=>{} }
+
 			style={[
 				styles.btnBase,
 				isPrimary ? styles.btnPrimary : styles.btnOutline,
+				isAvailable ? "" : styles.deactivated,
 				style,
 			]}
 		>
@@ -43,6 +46,9 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		width: '100%',
 		alignItems: 'center',
+	},
+	deactivated: {
+		backgroundColor: "grey",
 	},
 	btnPrimary: {
 		backgroundColor: Colors.primaria,
