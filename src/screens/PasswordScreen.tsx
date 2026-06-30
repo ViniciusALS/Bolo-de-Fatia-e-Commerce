@@ -1,6 +1,6 @@
 import { supabase } from '@/utils/supabase';
-import { StaticScreenProps, useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import InputField from '../components/InputField';
@@ -12,9 +12,7 @@ import { Colors } from '../theme';
 import { Usuario } from '../types';
 
 
-type Props = StaticScreenProps<{
-  usuario: Usuario;
-}>;
+type Props = NativeStackScreenProps<RootStackParamList, 'Password'>;
 
 
 export default function PasswordScreen({ route }: Props) {
@@ -22,17 +20,13 @@ export default function PasswordScreen({ route }: Props) {
 	const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 	const { login } = useUser();
 
-	const [usuario, setUsuario] = useState<Usuario>({
-		nome: route.params.usuario.nome,
-		sobrenome: route.params.usuario.sobrenome,
-		telefone: route.params.usuario.telefone,
-		email: route.params.usuario.email,
-	});
+	const [usuario, setUsuario] = useState<Usuario>(route.params.usuario);
 
 	const [senha, setSenha] = useState<string>();
 	const [senhaRepetida, setSenhaRepetida] = useState<string>();
 
 	function validaCampos() {
+
 		if (!senha)
 			return false;
 
@@ -65,20 +59,15 @@ export default function PasswordScreen({ route }: Props) {
 		if (!validaCampos())
 			return;
 
-		setUsuario(prev => ({...prev, senha: senha}))
-
-		console.log("Novo Usuario: ");
-		console.log(usuario)
-
 		try {
 			const {data, error} = await supabase
 				.from('usuarios')
 				.insert({
-					nome: usuario.nome,
-					sobrenome: usuario.sobrenome,
-					telefone: usuario.telefone,
-					email: usuario.email,
-					senha: usuario.senha
+					nome: usuario!.nome,
+					sobrenome: usuario!.sobrenome,
+					telefone: usuario!.telefone,
+					email: usuario!.email,
+					senha: senha
 				})
 				.select()
 				.single();
@@ -88,7 +77,14 @@ export default function PasswordScreen({ route }: Props) {
 					return;
 				}
 
-				console.log(data);
+				const novoUsuario: Usuario = {
+					id: data.id,
+					created_at: data.created_at,
+					...usuario
+				};
+
+				console.log(novoUsuario);
+				login(novoUsuario);
 		}
 		catch(error) {
 			console.log(error);
@@ -133,7 +129,6 @@ export default function PasswordScreen({ route }: Props) {
 
 			<LargeButton title={'Continuar'} isAvailable={validaCampos()} onPress={() => {
 				validaEconfiguraUsuario();
-				login(usuario);
 				navigation.navigate('Success')
 			}} />
 

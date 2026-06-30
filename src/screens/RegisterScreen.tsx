@@ -15,8 +15,6 @@ export default function RegisterScreen() {
 
 	const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-	const [usuario, setUsuario] = useState<Usuario>({});
-
 	const [nome, setNome] = useState<string>('');
 	const [sobrenome, setSobrenome] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
@@ -73,15 +71,14 @@ export default function RegisterScreen() {
 			return;
 		}
 
-		setUsuario({
+		const novoUsuario: Usuario = {
 			nome: nome,
 			sobrenome: sobrenome,
 			email: email,
 			telefone: telefone,
-		});
+		};
 
-		console.log("Usuario criado: ");
-		console.log(usuario);
+		navigation.navigate('Password', { usuario: novoUsuario });
 	}
 
 	return (
@@ -118,10 +115,7 @@ export default function RegisterScreen() {
 				/>
 			</View>
 
-			<LargeButton title={'Continuar'} isAvailable={validaCampos()} onPress={() => {
-				checkAndSetUsuario();
-				navigation.navigate('Password', { usuario: usuario });
-			}} />
+			<LargeButton title={'Continuar'} isAvailable={validaCampos()} onPress={() => checkAndSetUsuario()} />
 
 		</View>
 	);

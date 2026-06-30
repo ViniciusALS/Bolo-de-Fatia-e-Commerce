@@ -1,3 +1,5 @@
+import { Usuario } from '@/types';
+import { supabase } from '@/utils/supabase';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
@@ -17,27 +19,37 @@ interface FormData {
 
 export default function LoginScreen() {
 
-	const [formData, setFormData] = useState<FormData>({})
-
-	const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 	const { login } = useUser();
 
-	function handleInputChange(field: keyof FormData, value: string) {
-		setFormData(prevData => ({
-			...prevData,
-			[field]: value,
-		}));
-	}
+	const [email, setEmail] = useState<string>(" ");
+	const [senha, setSenha] = useState<string>(" ");
 
-	function handleLogin() {
-		login({
-			id: 1,
-			firstName: 'John',
-			lastName: 'Doe',
-			email: formData.email ?? '',
-			telephone: '',
-		});
-		navigation.navigate('MainTabs');
+	const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+	async function realizaLogin() {
+		try {
+			const {data, error} =
+				await supabase.from("usuarios")
+					.select()
+					.eq("email", email)
+					.single();
+
+			if (error){
+				console.log(error)
+				return false;
+			}
+
+			if (!data)
+				return;
+
+			const usuario: Usuario = data;
+			login(usuario);
+			navigation.navigate('MainTabs');
+		}
+		catch(error) {
+			console.log(error);
+			return;
+		}
 	}
 
 	return (
@@ -56,18 +68,18 @@ export default function LoginScreen() {
 				<InputField
 					label="Email"
 					placeholder=""
-					onChange={(value) => handleInputChange('email', value)}
+					onChange={(value) => setEmail(value)}
 				/>
 
 				<InputField
 					label="Senha"
 					placeholder=""
 					secureTextEntry
-					onChange={(value) => handleInputChange('password', value)}
+					onChange={(value) => setSenha(value)}
 				/>
 			</View>
 
-			<LargeButton title={'Continuar'} onPress={handleLogin} />
+			<LargeButton title={'Continuar'} onPress={realizaLogin} />
 
 		</View>
 	);

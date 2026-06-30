@@ -1,67 +1,66 @@
 import ProductCard from '@/components/ProductCard';
 import { Produto } from '@/types';
+import { supabase } from '@/utils/supabase';
+import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import RoundedButton from '../components/RoundedButtons';
 import ShoppingCartButton from '../components/ShoppingCartButton';
 import { useUser } from '../context/UserContext';
 import { Colors } from '../theme';
 
-
-const listaDeProdutos:Produto[] = [
-    {
-        id: 1,
-        nome: "Bolo de Floresta Negra",
-        price: 59.99,
-        imagePath: "'../../assets/images/bolo-floresta-negra.png'",
-        isFavorite: true,
-    },
-    {
-        id: 2,
-        nome: "Bolo de Laranja",
-        price: 45.99,
-        imagePath: "../../assets/images/bolo-floresta-negra.png",
-        isFavorite: true,
-    },
-    {
-        id: 3,
-        nome: "Bolo de Chocolate",
-        price: 69.99,
-        imagePath: "../../assets/images/bolo-floresta-negra.png",
-        isFavorite: true,
-    },
-    {
-        id: 4,
-        nome: "Bolo de Morango",
-        price: 79.99,
-        imagePath: "../../assets/images/bolo-floresta-negra.png",
-        isFavorite: true,
-    },
-    {
-        id: 5,
-        nome: "Bolo Formigueiro",
-        price: 37.99,
-        imagePath: "../../assets/images/bolo-floresta-negra.png",
-        isFavorite: true,
-    },
-    {
-        id: 6,
-        nome: "Bolo de Maracuja",
-        price: 49.99,
-        imagePath: "../../assets/images/bolo-floresta-negra.png",
-        isFavorite: true,
-    },
-];
-
 export default function HomeScreen() {
 
-    const { user } = useUser();
+    const { usuario } = useUser();
+
+    const [bolos, setBolos] = useState<Produto[]>([]);
+
+    useEffect(() => {
+        const getBolos = async () => {
+            try {
+                const { data, error } = await supabase.from('produto')
+                    .select(`
+                        id,
+                        created_at,
+                        nome,
+                        descricao,
+                        preco,
+                        imagem_uri,
+                        favorito(id)
+                    `);
+
+                if (error) {
+                    console.error('Error fetching todos:', error.message);
+                    return;
+                }
+
+                if (data && data.length > 0) {
+
+                    setBolos(data.map(e => ({
+                        id: e.id,
+                        created_at: e.created_at,
+                        nome: e.nome,
+                        descricao: e.descricao,
+                        preco: e.preco,
+                        imagem_uri: e.imagem_uri,
+                        favorito: e.favorito.length > 0 ? true : false
+                    })));
+
+                    console.log(bolos);
+                }
+            } catch (error) {
+                console.error('Error fetching todos: ', error);
+            }
+        }
+
+        getBolos();
+    }, []);
 
     return (
         <View style={style.safe}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={style.header}>
                     <View style={style.sectionTopBar}>
-                        <Text style={style.greeting}>Olá, {user!.firstName}!</Text>
+                        <Text style={style.greeting}>Olá, {usuario!.nome}!</Text>
                         <ShoppingCartButton/>
                     </View>
                     <Text style={style.description}>O que vai adoçar o seu dia hoje?</Text>
@@ -76,9 +75,11 @@ export default function HomeScreen() {
                     <RoundedButton name="Ver todos"  onPress={()=>console.log("Bolos pressionado")}/>
                 </View>
 
-                {listaDeProdutos.map((produto) => (
-                    <ProductCard key={produto.id} product={produto} />
-                ))}
+                <View style={style.grid}>
+                    {bolos.map((produto) => (
+                        <ProductCard key={produto.id} produto={produto} />
+                    ))}
+                </View>
             </ScrollView>
         </View>
     );
@@ -111,5 +112,12 @@ const style = StyleSheet.create({
         fontSize: 22,
         fontWeight: 'medium',
         color: Colors.quasePreto,
+    },
+    grid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        rowGap: 16,
+        marginTop: 16,
     },
 });

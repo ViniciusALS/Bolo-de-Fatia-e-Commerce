@@ -8,10 +8,12 @@ import CategoriesScreen from '../screens/CategoryScreen';
 import FavoritesScreen from '../screens/FavoriteScreen';
 import HomeScreen from '../screens/HomeScreen';
 import OrdersScreen from '../screens/OrdersScreen';
+import ProductScreen from '../screens/ProductScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { Colors } from '../theme';
+import { BottomTabParamList } from './types';
 
-const BottomTab = createBottomTabNavigator();
+const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   return (
@@ -70,6 +72,13 @@ export default function BottomTabNavigator() {
         options={{
           tabBarLabel: 'Perfil',
           tabBarIcon: ({ focused }) => <ProfileButton isFocused={focused} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="ProductDetail"
+        component={ProductScreen}
+        options={{
+          tabBarItemStyle: { display: 'none' },
         }}
       />
     </BottomTab.Navigator>

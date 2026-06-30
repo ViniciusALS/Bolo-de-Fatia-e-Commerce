@@ -1,6 +1,6 @@
 // import { Product } from '../data/mockData';
 
-import { Usuario } from "../types";
+import { Produto, Usuario } from "../types";
 
 export type RootStackParamList = {
   Landing: undefined;
@@ -13,8 +13,18 @@ export type RootStackParamList = {
   MainTabs: undefined;
   // Categories: undefined;
   // Products: { categoryId: string; categoryName: string };
-  // ProductDetail: { product: Product };
   // Checkout: undefined;
   Cart: undefined;
   // Profile: undefined;
+};
+
+export type BottomTabParamList = {
+  HomeTab: undefined;
+  CategoriesTab: undefined;
+  FavoritesTab: undefined;
+  OrdersTab: undefined;
+  ProfileTab: undefined;
+  ProductDetail: {
+    produto: Produto
+  };
 };

@@ -10,8 +10,9 @@ import NewAccountScreen from '../screens/SucessfulNewAccountScreen';
 // import CheckoutScreen from '../screens/CheckoutScreen';
 // import OrdersScreen from '../screens/OrdersScreen';
 import BottomTabNavigator from './BottomTabNavigator';
+import { RootStackParamList } from './types';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
   return (
@@ -23,11 +24,12 @@ export default function AppNavigator() {
         <Stack.Screen name="Landing" component={LandingScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Password" component={PasswordScreen} />
+
         <Stack.Screen name="Success" component={NewAccountScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="MainTabs" component={BottomTabNavigator} />
         {/* <Stack.Screen name="Products" component={ProductsScreen} /> */}
-        {/* <Stack.Screen name="ProductDetail" component={ProductDetailScreen} /> */}
+        {/* ProductDetail is registered inside BottomTabNavigator so the tab bar stays visible */}
         {/* <Stack.Screen name="Checkout" component={CheckoutScreen} /> */}
         {/* <Stack.Screen name="Orders" component={OrdersScreen} /> */}
         {/* <Stack.Screen name="Categories" component={BottomTabNavigator} /> */}
