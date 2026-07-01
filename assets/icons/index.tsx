@@ -262,8 +262,8 @@ export const ProfileFocusedSvg = ({color = (Colors.quasePreto)}:SvgProps) => (
     </Svg>
 )
 
-export const ShoppingCartSvg = ({color = (Colors.quasePreto)}:SvgProps) => (
-    <Svg width={24} height={20} fill="none">
+export const ShoppingCartSvg = ({color = (Colors.quasePreto), fill="none"}:{color?: string, fill?: string}) => (
+    <Svg width={24} height={20} fill={fill}>
         <Path
             stroke={color}
             strokeLinecap="round"

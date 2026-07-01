@@ -3,7 +3,6 @@ import { Produto } from '@/types';
 import { supabase } from '@/utils/supabase';
 import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import RoundedButton from '../components/RoundedButtons';
 import ShoppingCartButton from '../components/ShoppingCartButton';
 import { useUser } from '../context/UserContext';
 import { Colors } from '../theme';
@@ -66,14 +65,14 @@ export default function HomeScreen() {
                     <Text style={style.description}>O que vai adoçar o seu dia hoje?</Text>
                 </View>
 
-                <View style={style.sectionTopBar}>
+                {/* <View style={style.sectionTopBar}>
                     <Text style={style.sectionTitle}>Categorias</Text>
                     <RoundedButton name="Ver todos"  onPress={()=>console.log("Bolos pressionado")}/>
                 </View>
                 <View style={style.sectionTopBar}>
                     <Text style={style.sectionTitle}>Mais vendidos</Text>
                     <RoundedButton name="Ver todos"  onPress={()=>console.log("Bolos pressionado")}/>
-                </View>
+                </View> */}
 
                 <View style={style.grid}>
                     {bolos.map((produto) => (

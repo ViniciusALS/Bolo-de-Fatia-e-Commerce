@@ -14,7 +14,6 @@ export type RootStackParamList = {
   // Categories: undefined;
   // Products: { categoryId: string; categoryName: string };
   // Checkout: undefined;
-  Cart: undefined;
   // Profile: undefined;
 };
 
@@ -27,4 +26,5 @@ export type BottomTabParamList = {
   ProductDetail: {
     produto: Produto
   };
+  Cart: undefined;
 };

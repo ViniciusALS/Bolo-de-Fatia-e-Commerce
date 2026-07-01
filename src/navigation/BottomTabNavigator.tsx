@@ -1,3 +1,4 @@
+import CartScreen from '@/screens/CartScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CategoriesButton from '../components/CategoriesButton';
 import FavoriteButton from '../components/FavoriteButton';
@@ -81,6 +82,14 @@ export default function BottomTabNavigator() {
           tabBarItemStyle: { display: 'none' },
         }}
       />
+      <BottomTab.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          tabBarItemStyle: { display: 'none' },
+        }}
+      />
+
     </BottomTab.Navigator>
   );
 }

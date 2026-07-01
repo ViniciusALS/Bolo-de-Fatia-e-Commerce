@@ -1,17 +1,17 @@
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { TouchableOpacity } from "react-native";
 import { ShoppingCartSvg } from "../../assets/icons";
-import { RootStackParamList } from "../navigation/types";
+import { BottomTabParamList } from "../navigation/types";
 
 
-export default function ShoppingCartButton() {
+export default function ShoppingCartButton({fill="none"}:{fill?:string}) {
 
-    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<BottomTabNavigationProp<BottomTabParamList>>();
 
     return (
         <TouchableOpacity onPress={()=>navigation.navigate("Cart")}>
-            <ShoppingCartSvg/>
+            <ShoppingCartSvg fill={fill}/>
         </TouchableOpacity>
     );
 }
